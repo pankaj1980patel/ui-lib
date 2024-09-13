@@ -6,6 +6,11 @@ interface Props {
   variant: "sm" | "md" | "lg" | "xl" | "2xl";
   label: string;
   shadow?: boolean;
+  borderColor?: string;
+  borderType?: "solid" | "dashed" | "dotted";
+  borderWidth?: string;
+  shadowColor?: string;
+  badgeColor?: string;
 }
 
 const BtnTypeTwo = ({
@@ -14,10 +19,22 @@ const BtnTypeTwo = ({
   foregroundColor,
   label,
   shadow,
+  borderColor,
+  borderType = "solid",
+  borderWidth = "1px",
+  shadowColor,
+  badgeColor,
 }: Props) => {
+  const getShadowColor = () => {
+    return shadowColor ? shadowColor : backgroundColor + "40";
+  };
   const shadowStyle = shadow
-    ? { boxShadow: `0px 0px 0px 4px ${backgroundColor + "40"}` }
+    ? {
+        boxShadow: `0px 0px 0px 4px ${getShadowColor()}`,
+      }
     : {};
+
+  const btnBorderCss = `${borderWidth} ${borderType} ${borderColor}`;
 
   const commonBtnCss = `rounded-full`;
   const buttonClasses = {
@@ -33,12 +50,13 @@ const BtnTypeTwo = ({
       style={{
         backgroundColor: backgroundColor,
         color: foregroundColor,
+        border: borderColor ? btnBorderCss : "none",
         ...shadowStyle,
       }}
     >
       <div
         className={`w-[10px] h-[10px] rounded-full`}
-        style={{ backgroundColor: foregroundColor }}
+        style={{ backgroundColor: badgeColor ? badgeColor : foregroundColor }}
       />
       {label}
     </button>

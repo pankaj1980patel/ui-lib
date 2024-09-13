@@ -6,6 +6,10 @@ interface Props {
   variant: "sm" | "md" | "lg" | "xl" | "2xl";
   shadow?: boolean;
   onClick?: () => void;
+  borderColor?: string;
+  borderType?: "solid" | "dashed" | "dotted";
+  borderWidth?: string;
+  shadowColor?: string;
 }
 
 const BtnTypeThree = ({
@@ -14,11 +18,21 @@ const BtnTypeThree = ({
   foregroundColor,
   shadow,
   onClick,
+  borderColor,
+  borderType = "solid",
+  borderWidth = "1px",
+  shadowColor,
 }: Props) => {
+  const getShadowColor = () => {
+    return shadowColor ? shadowColor : backgroundColor + "40";
+  };
   const shadowStyle = shadow
-    ? { boxShadow: `0px 0px 0px 4px ${backgroundColor + "40"}` }
+    ? {
+        boxShadow: `0px 0px 0px 4px ${getShadowColor()}`,
+      }
     : {};
 
+  const btnBorderCss = `${borderWidth} ${borderType} ${borderColor}`;
   const commonBtnCss = `rounded-full`;
   const buttonClasses = {
     sm: `${commonBtnCss} text-sm font-semibold p-2`,
@@ -35,6 +49,7 @@ const BtnTypeThree = ({
       style={{
         backgroundColor: backgroundColor,
         color: foregroundColor,
+        border: borderColor ? btnBorderCss : "none",
         ...shadowStyle,
       }}
     >
