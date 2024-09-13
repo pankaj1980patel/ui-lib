@@ -10,6 +10,7 @@ export interface IButtonProps {
   borderType?: "solid" | "dashed" | "dotted";
   borderWidth?: string;
   shadowColor?: string;
+  badgeColor?: string;
 }
 
 const BtnTypeOne = ({
@@ -23,13 +24,15 @@ const BtnTypeOne = ({
   borderWidth = "1px",
   shadowColor,
 }: IButtonProps) => {
+  const getShadowColor = () => {
+    return shadowColor ? shadowColor : backgroundColor + "40";
+  };
   const shadowStyle = shadow
     ? {
-        boxShadow: `0px 0px 0px 4px ${
-          shadowColor ? shadowColor : backgroundColor + "40"
-        }`,
+        boxShadow: `0px 0px 0px 4px ${getShadowColor()}`,
       }
     : {};
+
   const btnBorderCss = `${borderWidth} ${borderType} ${borderColor}`;
   const commonBtnCss = `rounded-full`;
   const buttonClasses = {
@@ -40,6 +43,7 @@ const BtnTypeOne = ({
     "2xl": `${commonBtnCss} text-lg leading-[24px] font-semibold py-[16px] px-[28px]`,
   };
   const borderCss = `w-5 h-5 rounded-full border-2`;
+
   return (
     <button
       className={`flex gap-2 items-center box-border ${buttonClasses[variant]}`}

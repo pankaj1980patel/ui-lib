@@ -15,15 +15,16 @@ const page = ({ params }: { params: { type?: string } }) => {
       <h1 className="text-3xl font-bold  text-[#2F2B43] my-10">Buttons</h1>
       {ALL_BTNS.map((btns, index) => (
         <div className="space-y-10 mb-[88px]" key={index}>
-          {btns.map((btn, index) => (
-            <div className="flex flex-wrap items-start gap-[54px]" key={index}>
-              {VARIANTS.map((variant) =>
+          {btns.map((btn, index2) => (
+            <div className="flex flex-wrap items-start gap-[54px]" key={index2}>
+              {VARIANTS.map((variant, index3) =>
                 renderButtonComponent(
                   {
                     ...btn,
                     variant: variant as "sm" | "md" | "lg" | "xl" | "2xl",
                   },
-                  btnType
+                  btnType,
+                  index3
                 )
               )}
             </div>
@@ -38,7 +39,8 @@ export default page;
 
 const renderButtonComponent = (
   buttonProps: Omit<IButtonProps, "label">,
-  type: string
+  type: string,
+  index: number
 ) => {
   switch (type) {
     case "1":
@@ -47,11 +49,13 @@ const renderButtonComponent = (
           backgroundColor={buttonProps.backgroundColor}
           foregroundColor={buttonProps.foregroundColor}
           shadow={!!buttonProps.shadow}
+          shadowColor={buttonProps.shadowColor}
           label="Button CTA"
           variant={buttonProps.variant}
           borderColor={buttonProps.borderColor}
           borderType={buttonProps.borderType}
           borderWidth={buttonProps.borderWidth}
+          key={index}
         />
       );
     case "2":
@@ -59,12 +63,15 @@ const renderButtonComponent = (
         <BtnTypeTwo
           backgroundColor={buttonProps.backgroundColor}
           foregroundColor={buttonProps.foregroundColor}
+          badgeColor={buttonProps.badgeColor}
           shadow={!!buttonProps.shadow}
+          shadowColor={buttonProps.shadowColor}
           label="Button CTA"
           variant={buttonProps.variant}
-          // borderColor={buttonProps.borderColor}
-          // borderType={buttonProps.borderType}
-          // borderWidth={buttonProps.borderWidth}
+          borderColor={buttonProps.borderColor}
+          borderType={buttonProps.borderType}
+          borderWidth={buttonProps.borderWidth}
+          key={index}
         />
       );
     case "3":
@@ -73,7 +80,12 @@ const renderButtonComponent = (
           backgroundColor={buttonProps.backgroundColor}
           foregroundColor={buttonProps.foregroundColor}
           shadow={!!buttonProps.shadow}
+          shadowColor={buttonProps.shadowColor}
           variant={buttonProps.variant}
+          borderColor={buttonProps.borderColor}
+          borderType={buttonProps.borderType}
+          borderWidth={buttonProps.borderWidth}
+          key={index}
         />
       );
     default:
@@ -87,6 +99,7 @@ const renderButtonComponent = (
           borderColor={buttonProps.borderColor}
           borderType={buttonProps.borderType}
           borderWidth={buttonProps.borderWidth}
+          key={index}
         />
       );
   }
