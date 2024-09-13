@@ -10,6 +10,7 @@ export interface IIconButtonProps {
   borderType?: "solid" | "dashed" | "dotted";
   borderWidth?: string;
   shadowColor?: string;
+  className?: string;
 }
 
 const IconButton = ({
@@ -22,6 +23,7 @@ const IconButton = ({
   borderType = "solid",
   borderWidth = "1px",
   shadowColor,
+  className = "",
 }: IIconButtonProps) => {
   const shadowStyle = shadow
     ? {
@@ -34,9 +36,9 @@ const IconButton = ({
 
   return (
     <button
-      className={`flex gap-3 items-center box-border rounded-full shadow-xs ${
+      className={`flex gap-3 items-center box-border rounded-full shadow-xs font-semibold text-base leading-[22px] ${
         !label || label === "" ? "p-[10px]" : "py-[10px] px-[16px]"
-      }`}
+      } ${className}`}
       style={{
         backgroundColor: backgroundColor,
         color: foregroundColor,

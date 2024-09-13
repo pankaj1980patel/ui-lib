@@ -11,7 +11,7 @@ const page = () => {
           <div className="space-y-4" key={index1}>
             {singleSet.map((singleRow, index2) => (
               <div
-                className="flex flex-wrap items-start gap-[64px]"
+                className="flex flex-wrap items-start justify-between gap-[64px]"
                 key={index2}
               >
                 {singleRow.map((btn, index) => (
@@ -25,6 +25,7 @@ const page = () => {
                     borderType={btn.borderType}
                     borderWidth={btn.borderWidth}
                     icon={btn.icon}
+                    shadowColor={btn.shadowColor}
                   />
                 ))}
               </div>
